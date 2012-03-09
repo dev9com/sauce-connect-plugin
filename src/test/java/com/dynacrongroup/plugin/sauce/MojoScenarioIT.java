@@ -30,7 +30,7 @@ public class MojoScenarioIT {
     private static final Logger LOG = LoggerFactory.getLogger(MojoScenarioIT.class);
 
     @Test
-    public void testFullLifeCycle() throws MojoExecutionException {
+    public void testMojoLifeCycle() throws MojoExecutionException {
 
         StartMojo startMojo = new StartMojo();
         startMojo.sauceLabsUser = getValue(AbstractSauceConnectMojo.SAUCELABS_USER);

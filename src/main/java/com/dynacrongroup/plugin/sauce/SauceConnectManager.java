@@ -11,7 +11,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 
 /**
  * User: yurodivuie
@@ -137,6 +139,12 @@ public class SauceConnectManager {
                 + ".class");
         String jarPath = location.getPath();
         jarPath = jarPath.substring(jarPath.indexOf(":") + 1, jarPath.indexOf("!"));
+        try {
+            jarPath = URLDecoder.decode(jarPath, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            LOG.error(e.getMessage());
+        }
+
         LOG.debug("Jar path is " + jarPath);
         return jarPath;
     }

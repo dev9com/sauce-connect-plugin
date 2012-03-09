@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import static com.dynacrongroup.plugin.sauce.Configuration.getValue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * User: yurodivuie
@@ -32,7 +31,7 @@ public class SauceConnectManagerIT {
     public TestName name = new TestName();
 
     @Test
-    public void lifecycleTest() {
+    public void testTunnelLifeCycle() {
         LOG.info("starting {}", name.getMethodName());
 
         if (!stm.isTunnelActive()) {
