@@ -6,8 +6,10 @@ import org.apache.maven.plugin.logging.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
@@ -68,7 +70,11 @@ public class SauceConnectManager {
             ProcessBuilder builder = new ProcessBuilder(new String[]{"java", "-jar", getSauceConnectJar(), user, key});
             builder.directory(logDirectory);
             try {
-                builder.start();
+                Process process = builder.start();
+
+                // Read the first line in case of obvious failures.
+                log.info(new BufferedReader(new InputStreamReader(process.getInputStream())).readLine());
+
                 newTunnel = true;
             } catch (IOException e) {
                 log.error("Error when starting tunnel: " + e.getMessage());
@@ -130,6 +136,7 @@ public class SauceConnectManager {
                 + ".class");
         String jarPath = location.getPath();
         jarPath = jarPath.substring(jarPath.indexOf(":") + 1, jarPath.indexOf("!"));
+        log.debug("Jar path is " + jarPath);
         return jarPath;
     }
 
