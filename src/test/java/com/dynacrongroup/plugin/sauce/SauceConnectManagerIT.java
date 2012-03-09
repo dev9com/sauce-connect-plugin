@@ -1,6 +1,5 @@
 package com.dynacrongroup.plugin.sauce;
 
-import org.apache.maven.plugin.logging.Log;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -22,7 +21,7 @@ public class SauceConnectManagerIT {
 
 
     private SauceConnectManager stm = new SauceConnectManager(getValue("SAUCELABS_USER"),
-            getValue("SAUCELABS_KEY"), mock(Log.class));
+            getValue("SAUCELABS_KEY"));
 
     private static final Logger LOG = LoggerFactory.getLogger(SauceConnectManagerIT.class);
 

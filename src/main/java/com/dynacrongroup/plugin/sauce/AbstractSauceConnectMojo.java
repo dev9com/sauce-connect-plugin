@@ -84,7 +84,7 @@ abstract class AbstractSauceConnectMojo
                     "or environment property set to %s and %s.", SAUCELABS_USER, SAUCELABS_KEY));
         }
 
-        sauceConnectManager = new SauceConnectManager(sauceLabsUser, sauceLabsKey, this.getLog());
+        sauceConnectManager = new SauceConnectManager(sauceLabsUser, sauceLabsKey);
     }
 }
 
