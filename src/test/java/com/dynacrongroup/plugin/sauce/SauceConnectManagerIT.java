@@ -1,6 +1,5 @@
 package com.dynacrongroup.plugin.sauce;
 
-import com.dynacrongroup.webtest.util.ConfigurationValue;
 import org.apache.maven.plugin.logging.Log;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.junit.rules.TestName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.dynacrongroup.plugin.sauce.Configuration.getValue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -21,8 +21,8 @@ import static org.mockito.Mockito.mock;
 public class SauceConnectManagerIT {
 
 
-    private SauceConnectManager stm = new SauceConnectManager(ConfigurationValue.getConfigurationValue("SAUCELABS_USER", null),
-            ConfigurationValue.getConfigurationValue("SAUCELABS_KEY", null), mock(Log.class));
+    private SauceConnectManager stm = new SauceConnectManager(getValue("SAUCELABS_USER"),
+            getValue("SAUCELABS_KEY"), mock(Log.class));
 
     private static final Logger LOG = LoggerFactory.getLogger(SauceConnectManagerIT.class);
 
