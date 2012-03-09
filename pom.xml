@@ -3,7 +3,7 @@
 
     <groupId>com.dynacrongroup</groupId>
     <artifactId>sauce-connect-plugin</artifactId>
-    <version>0.0</version>
+    <version>0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>Sauce Connect Maven Plugin</name>
