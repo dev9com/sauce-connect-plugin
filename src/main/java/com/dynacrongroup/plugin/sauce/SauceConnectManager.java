@@ -57,7 +57,7 @@ public class SauceConnectManager {
 
             JSONObject tunnelStatus = sauceRest.getTunnelStatus((String) tunnels.get(0));
             if (tunnelStatus != null) {
-                LOG.debug("Tunnel status: " + tunnelStatus.toJSONString());
+                LOG.trace("Tunnel status: " + tunnelStatus.toJSONString());
                 status = (String)tunnelStatus.get("status");
             }
             else {
