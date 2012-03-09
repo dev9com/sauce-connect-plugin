@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import static com.dynacrongroup.plugin.sauce.Configuration.getValue;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -37,6 +38,7 @@ public class SauceConnectManagerIT {
         if (!stm.isTunnelActive()) {
             LOG.info("No tunnel present; starting now for test.");
             stm.startNewTunnel(temporaryFolder.getRoot(), true);
+            assertThat(stm.isTunnelActive(), is(true));
         }
 
         stm.stopCurrentTunnel(true);
