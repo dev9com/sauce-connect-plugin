@@ -1,5 +1,6 @@
 package com.dynacrongroup.plugin.sauce;
 
+import org.apache.maven.plugin.logging.Log;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -11,6 +12,7 @@ import static com.dynacrongroup.plugin.sauce.Configuration.getValue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * User: yurodivuie
@@ -21,7 +23,7 @@ public class SauceConnectManagerIT {
 
 
     private SauceConnectManager stm = new SauceConnectManager(getValue("SAUCELABS_USER"),
-            getValue("SAUCELABS_KEY"));
+            getValue("SAUCELABS_KEY"), mock(Log.class));
 
     private static final Logger LOG = LoggerFactory.getLogger(SauceConnectManagerIT.class);
 

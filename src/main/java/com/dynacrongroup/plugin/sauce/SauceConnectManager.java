@@ -2,10 +2,9 @@ package com.dynacrongroup.plugin.sauce;
 
 import com.dynacrongroup.webtest.sauce.SauceREST;
 import com.saucelabs.sauceconnect.SauceConnect;
+import org.apache.maven.plugin.logging.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,24 +22,30 @@ import java.net.URLDecoder;
 public class SauceConnectManager {
 
     public static final String RUNNING_STATUS = "running";
-    public static final String NO_TUNNEL_STATUS = "none";
-    public static final String MULTIPLE_TUNNEL_STATUS = "multiple";
-    public static final String INDETERMINATE_STATUS = "indeterminate";
-
-    private static final Logger LOG = LoggerFactory.getLogger(SauceConnectManager.class);
+    public static final String NO_TUNNEL_STATUS = "not present";
+    public static final String MULTIPLE_TUNNEL_STATUS = "has multiple instances";
+    public static final String INDETERMINATE_STATUS = "status not found";
 
     String user;
     String key;
     SauceREST sauceRest;
+    Log log;
 
-    public SauceConnectManager(String user, String key) {
+    public SauceConnectManager(String user, String key, Log log) {
         this.user = user;
         this.key = key;
         this.sauceRest = new SauceREST(user, key);
+        this.log = log;
     }
 
     public Boolean isTunnelActive() {
-        return getTunnelStatus().equals(RUNNING_STATUS);
+        Boolean active = false;
+        String status = getTunnelStatus();
+        if (RUNNING_STATUS.equalsIgnoreCase(status) ||
+                MULTIPLE_TUNNEL_STATUS.equalsIgnoreCase(status)) {
+            active = true;
+        }
+        return active;
     }
 
     public String getTunnelStatus() {
@@ -57,7 +62,7 @@ public class SauceConnectManager {
 
             JSONObject tunnelStatus = sauceRest.getTunnelStatus((String) tunnels.get(0));
             if (tunnelStatus != null) {
-                LOG.trace("Tunnel status: " + tunnelStatus.toJSONString());
+                log.debug("Tunnel status: " + tunnelStatus.toJSONString());
                 status = (String)tunnelStatus.get("status");
             }
             else {
@@ -67,29 +72,29 @@ public class SauceConnectManager {
         return status;
     }
 
-    public void startNewTunnel(File LOGDirectory, Boolean blockUntilReady) {
+    public void startNewTunnel(File logDirectory, Boolean blockUntilReady) {
         Boolean newTunnel = false;
         if (!isTunnelActive()) {
             ProcessBuilder builder = new ProcessBuilder(new String[]{"java", "-jar", getSauceConnectJar(), user, key});
-            builder.directory(LOGDirectory);
+            builder.directory(logDirectory);
             try {
                 Process process = builder.start();
 
                 // Read the first line in case of obvious failures.
-                LOG.info(new BufferedReader(new InputStreamReader(process.getInputStream())).readLine());
+                log.info(new BufferedReader(new InputStreamReader(process.getInputStream())).readLine());
 
                 newTunnel = true;
             } catch (IOException e) {
-                LOG.error("Error when starting tunnel: " + e.getMessage());
+                log.error("Error when starting tunnel: " + e.getMessage());
             }
         }
 
         if (blockUntilReady && newTunnel) {
             if (waitForTunnelStatus(RUNNING_STATUS, 120 )) {
-                LOG.debug("Successfully started tunnel");
+                log.debug("Successfully started tunnel");
             }
             else {
-                LOG.warn("Failed to start tunnel before timeout was reached.");
+                log.warn("Failed to start tunnel before timeout was reached.");
             }
         }
     }
@@ -104,10 +109,10 @@ public class SauceConnectManager {
         }
         if (blockUntilStopped) {
             if (waitForTunnelStatus(NO_TUNNEL_STATUS, 120 )) {
-                LOG.debug("Successfully stopped tunnel");
+                log.debug("Successfully stopped tunnel");
             }
             else {
-                LOG.warn("Failed to stop tunnel before timeout was reached.");
+                log.warn("Failed to stop tunnel before timeout was reached.");
             }
         }
     }
@@ -124,10 +129,10 @@ public class SauceConnectManager {
             try {
                 Thread.sleep(interval * 1000);
             } catch (InterruptedException e) {
-                LOG.error("Thread interrupted: " + e.getMessage());
+                log.error("Thread interrupted: " + e.getMessage());
             }
             status = getTunnelStatus();
-            LOG.debug("current status is " + status);
+            log.info("Tunnel " + status);
         }
         return status.equalsIgnoreCase(expectedStatus);
     }
@@ -142,10 +147,10 @@ public class SauceConnectManager {
         try {
             jarPath = URLDecoder.decode(jarPath, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            LOG.error(e.getMessage());
+            log.error(e.getMessage());
         }
 
-        LOG.debug("Jar path is " + jarPath);
+        log.debug("Jar path is " + jarPath);
         return jarPath;
     }
 

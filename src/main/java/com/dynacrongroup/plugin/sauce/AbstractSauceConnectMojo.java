@@ -48,7 +48,7 @@ abstract class AbstractSauceConnectMojo
     /**
      * Sauce Labs user name.  Can be pulled from the environment or system properties, alternately.
      *
-     * @parameter expression="${sauce-connect.user}" default-value=null
+     * @parameter expression="${sauce-connect.user}"
      */
     String sauceLabsUser;
 
@@ -56,7 +56,7 @@ abstract class AbstractSauceConnectMojo
     /**
      * Sauce Labs key.  Can be pulled from the environment or system properties, alternately.
      *
-     * @parameter expression="${sauce-connect.key}" default-value=null
+     * @parameter expression="${sauce-connect.key}"
      */
     String sauceLabsKey;
 
@@ -84,7 +84,7 @@ abstract class AbstractSauceConnectMojo
                     "or environment property set to %s and %s.", SAUCELABS_USER, SAUCELABS_KEY));
         }
 
-        sauceConnectManager = new SauceConnectManager(sauceLabsUser, sauceLabsKey);
+        sauceConnectManager = new SauceConnectManager(sauceLabsUser, sauceLabsKey, getLog());
     }
 }
 

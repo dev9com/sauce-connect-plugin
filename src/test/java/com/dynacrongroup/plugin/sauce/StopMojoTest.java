@@ -59,4 +59,14 @@ public class StopMojoTest {
         verify(mockScm).stopCurrentTunnel(true);
         verify(mockScm).getTunnelStatus();
     }
+
+/*    @Test
+    public void justStopItAlready() throws MojoExecutionException {
+        LOG.info("starting {}", name.getMethodName());
+
+        StopMojo stopMojo = new StopMojo();
+        stopMojo.sauceConnectManager = new SauceConnectManager(getValue("SAUCELABS_USER"),
+                getValue("SAUCELABS_KEY"));
+        stopMojo.executeGoal();
+    }*/
 }

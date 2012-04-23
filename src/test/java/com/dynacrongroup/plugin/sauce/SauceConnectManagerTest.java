@@ -1,6 +1,7 @@
 package com.dynacrongroup.plugin.sauce;
 
 import com.dynacrongroup.webtest.sauce.SauceREST;
+import org.apache.maven.plugin.logging.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
  */
 public class SauceConnectManagerTest {
 
-    SauceConnectManager scm = new SauceConnectManager("user", "key");
+    SauceConnectManager scm = new SauceConnectManager("user", "key", mock(Log.class));
 
     private static final Logger LOG = LoggerFactory.getLogger(SauceConnectManagerTest.class);
 
