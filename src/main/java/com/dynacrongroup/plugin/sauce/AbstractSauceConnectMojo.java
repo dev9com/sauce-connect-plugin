@@ -71,10 +71,12 @@ abstract class AbstractSauceConnectMojo
     abstract void executeGoal() throws MojoExecutionException;
 
     private void initialize() throws MojoExecutionException {
-        if (sauceLabsUser == null) {
+        if (sauceLabsUser == null || sauceLabsUser == "") {
+            getLog().info("Getting user from env/sys props");
             sauceLabsUser = Configuration.getValue(SAUCELABS_USER);
         }
-        if (sauceLabsKey == null) {
+        if (sauceLabsKey == null || sauceLabsKey == "") {
+            getLog().info("Getting key from env/sys props");
             sauceLabsKey = Configuration.getValue(SAUCELABS_KEY);
         }
 
