@@ -1,6 +1,6 @@
-package com.dynacrongroup.plugin.sauce;
+package com.dev9.plugin.sauce;
 
-import com.dynacrongroup.webtest.sauce.SauceREST;
+import com.dev9.webtest.sauce.SauceREST;
 import org.apache.maven.plugin.logging.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

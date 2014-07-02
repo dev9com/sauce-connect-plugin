@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dynacrongroup</groupId>
+    <groupId>com.dev9</groupId>
     <artifactId>sauce-connect-plugin</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>Sauce Connect Maven Plugin</name>
-    <url>https://github.com/dynacron-group/${project.artifactId}</url>
+    <url>https://github.com/dev9com/${project.artifactId}</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -19,8 +19,8 @@
     <developers>
         <developer>
             <name>David Drake</name>
-            <email>david DOT drake AT dynacrongroup DOT com</email>
-            <organization>Dynacron Group</organization>
+            <email>david DOT drake AT dev9 DOT com</email>
+            <organization>Dev9</organization>
             <roles>
                 <role>Lead SDET</role>
             </roles>
@@ -36,19 +36,19 @@
         <repository>
             <id>cloudbees-private-release-repository</id>
             <name>CloudBees Repository</name>
-            <url>dav:https://repository-dynacrongroup.forge.cloudbees.com/release/</url>
+            <url>dav:https://repository-dev9.forge.cloudbees.com/release/</url>
         </repository>
         <site>
             <id>cloudbees-private-release-repository</id>
             <name>CloudBees Repository</name>
-            <url>dav:https://repository-dynacrongroup.forge.cloudbees.com/release/sites/${project.artifactId}</url>
+            <url>dav:https://repository-dev9.forge.cloudbees.com/release/sites/${project.artifactId}</url>
         </site>
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:dynacron-group/${project.artifactId}.git</connection>
-        <developerConnection>scm:git:git@github.com:dynacron-group/${project.artifactId}.git</developerConnection>
-        <url>scm:git:git@github.com:dynacron-group/${project.artifactId}.git</url>
+        <connection>scm:git:git@github.com:dev9com/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:git@github.com:dev9com/${project.artifactId}.git</developerConnection>
+        <url>scm:git:git@github.com:dev9com/${project.artifactId}.git</url>
     </scm>
 
     <prerequisites>
@@ -59,7 +59,7 @@
         <!-- provides sauce-rest-->
         <repository>
             <id>dynacrongroup-repository</id>
-            <url>https://repository-dynacrongroup.forge.cloudbees.com/release</url>
+            <url>https://repository-dev9.forge.cloudbees.com/release</url>
         </repository>
 
         <!-- provides sauce-connect -->
@@ -83,9 +83,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.dynacrongroup</groupId>
+            <groupId>com.dev9</groupId>
             <artifactId>sauce-rest</artifactId>
-            <version>0.1</version>
+            <version>1.0.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
@@ -171,7 +171,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.0</version>
+                    <version>3.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

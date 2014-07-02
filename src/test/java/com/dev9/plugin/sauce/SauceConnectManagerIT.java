@@ -1,4 +1,4 @@
-package com.dynacrongroup.plugin.sauce;
+package com.dev9.plugin.sauce;
 
 import org.apache.maven.plugin.logging.Log;
 import org.junit.Rule;
@@ -8,7 +8,7 @@ import org.junit.rules.TestName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.dynacrongroup.plugin.sauce.Configuration.getValue;
+import static com.dev9.plugin.sauce.Configuration.getValue;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

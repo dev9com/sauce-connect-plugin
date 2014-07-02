@@ -1,4 +1,4 @@
-package com.dynacrongroup.plugin.sauce;
+package com.dev9.plugin.sauce;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.junit.Rule;

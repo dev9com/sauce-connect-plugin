@@ -1,4 +1,4 @@
-package com.dynacrongroup.plugin.sauce;
+package com.dev9.plugin.sauce;
 
 /**
  * Tries to load a configuration value. You can pass in a configuration value

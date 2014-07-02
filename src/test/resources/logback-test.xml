@@ -10,7 +10,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.dynacrongroup" level="DEBUG" />
+	<logger name="com.dev9" level="DEBUG" />
 
 	<root level="WARN">
 		<appender-ref ref="STDOUT" />
